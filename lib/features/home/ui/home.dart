@@ -1,12 +1,12 @@
 import "package:cart_app/features/cart/ui/cart.dart";
-import "package:cart_app/features/home/ui/tabBar/tvTabBar.dart";
-import "package:cart_app/features/home/ui/tabBar/phoneTabBar.dart";
-import "package:cart_app/features/home/ui/tabBar/pcTabBar.dart";
+// import "package:cart_app/features/home/ui/tabBar/tvTabBar.dart";
+// import "package:cart_app/features/home/ui/tabBar/phoneTabBar.dart";
+// import "package:cart_app/features/home/ui/tabBar/pcTabBar.dart";
 import "package:cart_app/features/wishlist/ui/wishlist.dart";
 import 'package:flutter/material.dart';
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:cart_app/features/home/bloc/home_bloc.dart";
-import "package:cart_app/features/home/ui/listTile.dart";
+// import "package:cart_app/features/home/ui/listTile.dart";
 import "package:cart_app/features/home/ui/tabBar/tabBar.dart";
 
 
@@ -51,24 +51,11 @@ class _HomeState extends State<Home> {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Item added to Cart")));
       }
 
-      // else if (state is TvTabSelectedActionState){
-      //   Navigator.push(
-      //         context, MaterialPageRoute(builder: (context) => TvTabBar()));
-      // }
-
-      //  else if (state is PcTabSelectedActionState){
-      //   Navigator.push(
-      //         context, MaterialPageRoute(builder: (context) => PcTabBar()));
-      // }
-
-      //  else if (state is  PhoneTabSelectedActionState){
-      //   Navigator.push(
-      //         context, MaterialPageRoute(builder: (context) => PhoneTabBar()));
-      // }
+    
       },
       builder: (context, state) {
         List<Widget> pages = [
-          TabBarWidget(homeBloc: homeBloc) , 
+          TabBarWidget(homeBloc: homeBloc),
           Text("Page  two"), 
           Text("page three")
         ];
@@ -98,13 +85,8 @@ class _HomeState extends State<Home> {
                 ],
               ),
               body: pages[selectedPage], 
-              // ListView.builder(
-              //   itemCount: successState.products.length,
-              //   itemBuilder: (context, index) {
-              //     final productModel = successState.products[index];
-              //     return ListTileWidget(productModel: productModel, homeBloc: HomeBloc());
-              //   },
-              // ),
+              
+              
               bottomNavigationBar: Row(children: [
                   GestureDetector(
                     onTap: () {
@@ -144,5 +126,3 @@ class _HomeState extends State<Home> {
     );
   }
 }
-
-
