@@ -4,8 +4,6 @@ import 'package:bloc/bloc.dart';
 import 'package:cart_app/data/cart_items.dart';
 import 'package:cart_app/data/wishlist_items.dart';
 import 'package:cart_app/features/home/models/home_product.dart';
-// import 'package:cart_app/features/home/ui/home.dart';
-// import "package:cart_app/features/home/models/home_product.dart";
 import "package:cart_app/data/data.dart";
 import 'package:meta/meta.dart';
 
@@ -15,10 +13,14 @@ part 'home_state.dart';
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc() : super(HomeInitialState()) {
     on<HomeInitialEvent>(homeInitialEvent);
-    on<HomeProductWishlistButtonClickedEvent>(homeProductWishlistButtonClickedEvent);
+    on<HomeProductWishlistButtonClickedEvent>(
+        homeProductWishlistButtonClickedEvent);
     on<HomeProductCartButtonClickedEvent>(homeProductCartButtonClickedEvent);
     on<HomeWishlistButtonNavigateEvent>(homeWishlistButtonNavigateEvent);
     on<HomeCartButtonNavigateEvent>(homeCartButtonNavigateEvent);
+    on<PcTabSelectEvent>(pcTabSelectEvent);
+    on<TvTabSelectEvent>(tvTabSelectEvent);
+    on<PhoneTabSelectEvent>(phoneTabSelectEvent);
   }
 
   FutureOr<void> homeInitialEvent(
@@ -38,9 +40,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   FutureOr<void> homeProductWishlistButtonClickedEvent(
       HomeProductWishlistButtonClickedEvent event, Emitter<HomeState> emit) {
-      print("wishlist click");
-      wishlistItems.add(event.clickedProduct);
-      emit(HomeProductItemWishlistedActionState());
+    print("wishlist clicked");
+    wishlistItems.add(event.clickedProduct);
+    print("emitting");
+    emit(HomeProductItemWishlistedActionState());
   }
 
   FutureOr<void> homeProductCartButtonClickedEvent(
@@ -61,4 +64,22 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     print("navigate cart");
     emit(HomeNavigateToCartPageActionState());
   }
+
+  FutureOr<void> pcTabSelectEvent(
+      PcTabSelectEvent event, Emitter<HomeState> emit) {
+    print("pc tab is selected");
+    emit(PcTabSelectedActionState());
+  }
+
+  FutureOr<void> tvTabSelectEvent(
+      TvTabSelectEvent event, Emitter<HomeState> emit) {
+    print("tv tab is selected");
+    emit(TvTabSelectedActionState());
+  }
+
+  FutureOr<void> phoneTabSelectEvent(
+      PhoneTabSelectEvent event, Emitter<HomeState> emit) {
+        print("phone tba is selected");
+        emit(PhoneTabSelectedActionState());
+      }
 }

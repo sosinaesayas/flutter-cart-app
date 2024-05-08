@@ -1,9 +1,13 @@
 import "package:cart_app/features/cart/ui/cart.dart";
+import "package:cart_app/features/home/ui/tabBar/tvTabBar.dart";
+import "package:cart_app/features/home/ui/tabBar/phoneTabBar.dart";
+import "package:cart_app/features/home/ui/tabBar/pcTabBar.dart";
 import "package:cart_app/features/wishlist/ui/wishlist.dart";
 import 'package:flutter/material.dart';
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:cart_app/features/home/bloc/home_bloc.dart";
 import "package:cart_app/features/home/ui/listTile.dart";
+import "package:cart_app/features/home/ui/tabBar/tabBar.dart";
 
 
 class Home extends StatefulWidget {
@@ -19,7 +23,7 @@ class _HomeState extends State<Home> {
     homeBloc.add(HomeInitialEvent());
     super.initState();
   }
-
+  int selectedPage = 0;
   final HomeBloc homeBloc = HomeBloc();
   @override
   Widget build(BuildContext context) {
@@ -28,6 +32,8 @@ class _HomeState extends State<Home> {
       listenWhen: (previous, current) => current is HomeActionState,
       buildWhen: (previous, current) => current is! HomeActionState,
       listener: (context, state) {
+        print(state);
+        print("listening");
         if (state is HomeNavigateToCartPageActionState) {
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => Cart()));
@@ -37,14 +43,35 @@ class _HomeState extends State<Home> {
               context, MaterialPageRoute(builder: (context) => Wishlist()));
         }
         else if (state is HomeProductItemWishlistedActionState){
+          print("state is here");
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("Item added to Wishlist")));
         }
 
       else if(state is HomeProductItemCartedActionState){
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Item added to Cart")));
       }
+
+      // else if (state is TvTabSelectedActionState){
+      //   Navigator.push(
+      //         context, MaterialPageRoute(builder: (context) => TvTabBar()));
+      // }
+
+      //  else if (state is PcTabSelectedActionState){
+      //   Navigator.push(
+      //         context, MaterialPageRoute(builder: (context) => PcTabBar()));
+      // }
+
+      //  else if (state is  PhoneTabSelectedActionState){
+      //   Navigator.push(
+      //         context, MaterialPageRoute(builder: (context) => PhoneTabBar()));
+      // }
       },
       builder: (context, state) {
+        List<Widget> pages = [
+          TabBarWidget(homeBloc: homeBloc) , 
+          Text("Page  two"), 
+          Text("page three")
+        ];
         switch (state.runtimeType) {
           case HomeLoadingState:
             return Scaffold(
@@ -70,13 +97,40 @@ class _HomeState extends State<Home> {
                       icon: Icon(Icons.shopping_bag_outlined)),
                 ],
               ),
-              body: ListView.builder(
-                itemCount: successState.products.length,
-                itemBuilder: (context, index) {
-                  final productModel = successState.products[index];
-                  return ListTileWidget(productModel: productModel, homeBloc: HomeBloc());
-                },
-              ),
+              body: pages[selectedPage], 
+              // ListView.builder(
+              //   itemCount: successState.products.length,
+              //   itemBuilder: (context, index) {
+              //     final productModel = successState.products[index];
+              //     return ListTileWidget(productModel: productModel, homeBloc: HomeBloc());
+              //   },
+              // ),
+              bottomNavigationBar: Row(children: [
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        selectedPage = 0;
+                      });
+                    },
+                    child: Icon(Icons.home),
+                  ), 
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        selectedPage = 1;
+                      });
+                    },
+                    child: Icon(Icons.person),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        selectedPage = 2;
+                      });
+                    },
+                    child: Icon(Icons.phone),
+                  )
+              ],),
             );
 
           case HomeErrorState:

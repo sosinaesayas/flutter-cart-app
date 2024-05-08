@@ -26,3 +26,9 @@ class HomeNavigateToCartPageActionState extends HomeActionState{}
 class HomeProductItemWishlistedActionState extends HomeActionState{}
 
 class HomeProductItemCartedActionState extends HomeActionState{}
+
+class PcTabSelectedActionState extends HomeActionState{}
+
+class TvTabSelectedActionState extends HomeActionState{}
+
+class PhoneTabSelectedActionState extends HomeActionState{}

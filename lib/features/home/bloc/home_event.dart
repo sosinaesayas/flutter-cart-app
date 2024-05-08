@@ -13,10 +13,14 @@ class HomeProductWishlistButtonClickedEvent extends HomeEvent{
 class HomeProductCartButtonClickedEvent extends HomeEvent{
   final ProductModel clickedProduct;
   HomeProductCartButtonClickedEvent({required this.clickedProduct});
-
-  
 }
 
 class HomeWishlistButtonNavigateEvent extends HomeEvent{}
 
 class HomeCartButtonNavigateEvent extends HomeEvent{}
+
+class PcTabSelectEvent extends HomeEvent{}
+
+class TvTabSelectEvent extends HomeEvent{}
+
+class PhoneTabSelectEvent extends HomeEvent{}
