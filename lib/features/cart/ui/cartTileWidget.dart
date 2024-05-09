@@ -1,12 +1,11 @@
-
 import "package:cart_app/features/cart/bloc/cart_bloc.dart";
 import 'package:flutter/material.dart';
-import "package:cart_app/features/home/ui/listTile.dart";
+// import "package:cart_app/features/home/ui/listTile.dart";
 import "package:cart_app/features/home/models/home_product.dart";
 import "package:flutter/rendering.dart";
 import "package:flutter/widgets.dart";
-import "package:flutter_bloc/flutter_bloc.dart";
-import "package:cart_app/features/home/bloc/home_bloc.dart";
+// import "package:flutter_bloc/flutter_bloc.dart";
+// import "package:cart_app/features/home/bloc/home_bloc.dart";
 
 class CartTileWidget extends StatelessWidget {
   final ProductModel productModel;
@@ -32,7 +31,7 @@ class CartTileWidget extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
               image:DecorationImage(
                 fit:BoxFit.cover,
-                image: AssetImage(productModel.ImageUrl),
+                image: AssetImage(productModel.imageUrl),
               )
             ),
           ),

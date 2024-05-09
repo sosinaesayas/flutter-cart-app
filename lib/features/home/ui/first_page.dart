@@ -1,3 +1,4 @@
+import 'package:cart_app/features/home/ui/home_widgets.dart';
 import 'package:cart_app/features/home/ui/tabBar/pcTabBar.dart';
 import 'package:cart_app/features/home/ui/tabBar/phoneTabBar.dart';
 import 'package:flutter/material.dart';
@@ -5,15 +6,15 @@ import 'package:cart_app/features/home/bloc/home_bloc.dart';
 import 'package:cart_app/features/home/ui/tabBar/tvTabBar.dart';
 import 'package:flutter/rendering.dart';
 
-class TabBarWidget extends StatefulWidget {
+class FirstPage extends StatefulWidget {
   final HomeBloc homeBloc;
-  const TabBarWidget({Key? key, required this.homeBloc}) : super(key: key);
+  const FirstPage({Key? key, required this.homeBloc}) : super(key: key);
 
   @override
-  _TabBarWidgetState createState() => _TabBarWidgetState();
+  _FirstPageState createState() => _FirstPageState();
 }
 
-class _TabBarWidgetState extends State<TabBarWidget>
+class _FirstPageState extends State<FirstPage>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
@@ -31,7 +32,9 @@ class _TabBarWidgetState extends State<TabBarWidget>
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Scaffold(
+      // backgroundColor: const Color.fromARGB(255, 188, 217, 240),
+      body: Column(
         children: [
           Container(
             child: TabBar(
@@ -95,15 +98,18 @@ class _TabBarWidgetState extends State<TabBarWidget>
              
             ),
           ),
-          TabBarView(
-            controller: _tabController,
-            children: [
-              TvTabBar(),
-              PcTabBar(),
-              PhoneTabBar(),
-            ],
+          Expanded(
+            child: TabBarView(
+              controller: _tabController,
+              children: [
+                ProductsListPage(),
+                PcTabBar(),
+                PhoneTabBar(),
+              ],
+            ),
           ),
         ],
+      ),
     );
   }
 }

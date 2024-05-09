@@ -5,7 +5,7 @@ import 'package:cart_app/data/cart_items.dart';
 import 'package:cart_app/data/data2.dart';
 import 'package:cart_app/data/wishlist_items.dart';
 import 'package:cart_app/features/home/models/home_product.dart';
-import "package:cart_app/data/data.dart";
+// import "package:cart_app/data/data.dart";
 import 'package:meta/meta.dart';
 
 part 'home_event.dart';
@@ -30,12 +30,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     await Future.delayed(Duration(seconds: 3));
     emit(HomeLoaddedSuccessState(
         products: Electronics.electronicsProducts
-            .map((e) => ProductModel(
-                id: e["id"],
-                name: e["name"],
-                description: e["description"],
-                price: e["price"],
-                ImageUrl: e["ImageUrl"]))
+            .map((e) => ProductModel.fromJson(e))
             .toList()));
   }
 
@@ -56,13 +51,13 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   FutureOr<void> homeWishlistButtonNavigateEvent(
       HomeWishlistButtonNavigateEvent event, Emitter<HomeState> emit) {
-    print("navigate wishlist");
+    print("navigate to wishlist");
     emit(HomeNavigateToWishlistPageActionState());
   }
 
   FutureOr<void> homeCartButtonNavigateEvent(
       HomeCartButtonNavigateEvent event, Emitter<HomeState> emit) {
-    print("navigate cart");
+    print("navigate to cart");
     emit(HomeNavigateToCartPageActionState());
   }
 

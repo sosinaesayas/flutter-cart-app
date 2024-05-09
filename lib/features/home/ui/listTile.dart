@@ -1,10 +1,7 @@
-// import "package:cart_app/features/home/bloc/home_event.dart";
 import 'package:flutter/material.dart';
-import "package:cart_app/features/home/ui/listTile.dart";
 import "package:cart_app/features/home/models/home_product.dart";
 import "package:flutter/rendering.dart";
 import "package:flutter/widgets.dart";
-import "package:flutter_bloc/flutter_bloc.dart";
 import "package:cart_app/features/home/bloc/home_bloc.dart";
 
 class ListTileWidget extends StatelessWidget {
@@ -31,7 +28,7 @@ class ListTileWidget extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
               image:DecorationImage(
                 fit:BoxFit.cover,
-                image: AssetImage(productModel.ImageUrl),
+                image: AssetImage(productModel.imageUrl),
               )
             ),
           ),
