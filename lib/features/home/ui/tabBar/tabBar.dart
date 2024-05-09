@@ -1,45 +1,9 @@
 import 'package:cart_app/features/home/ui/tabBar/pcTabBar.dart';
 import 'package:cart_app/features/home/ui/tabBar/phoneTabBar.dart';
 import 'package:flutter/material.dart';
-// import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cart_app/features/home/bloc/home_bloc.dart';
 import 'package:cart_app/features/home/ui/tabBar/tvTabBar.dart';
-
-// class TabBarWidget extends StatelessWidget {
-//   final HomeBloc homeBloc;
-//   const TabBarWidget({Key? key, required this.homeBloc}) : super(key: key);
-
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       backgroundColor: Colors.blue,
-//       body: Column(
-//         children: [
-//           TabBar(
-//             tabs: [
-//               Tab(text: 'TV'),
-//               Tab(text: 'PC'),
-//               Tab(text: 'Phone'),
-//             ],
-           
-//           ),
-//           Expanded(
-//             child: TabBarView(
-//               children: [
-//                TvTabBar(),
-//                PcTabBar(),
-//                PhoneTabBar(),
-                
-//               ],
-//             ),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }
-
+import 'package:flutter/rendering.dart';
 
 class TabBarWidget extends StatefulWidget {
   final HomeBloc homeBloc;
@@ -68,19 +32,70 @@ class _TabBarWidgetState extends State<TabBarWidget>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue,
+      // backgroundColor: const Color.fromARGB(255, 188, 217, 240),
       body: Column(
         children: [
-          TabBar(
-            controller: _tabController,
-            tabs: [
-              Tab(text: 'TV'),
-              Tab(text: 'PC'),
-              Tab(text: 'Phone'),
-            ],
-            labelColor: Colors.white, // Color for selected tab label
-            unselectedLabelColor: Colors.grey, // Color for unselected tab labels
-            indicatorColor: Colors.white, // Color for tab selection indicator
+          Container(
+            child: TabBar(
+              controller: _tabController,
+              tabs: [
+                Material(                   
+                  elevation:
+                      4, // Adjust the elevation to control the shadow effect
+                  borderRadius: BorderRadius.circular(24),
+                  child: Container(
+                    width: 100,
+                    height: 35,
+                    decoration: BoxDecoration(
+                      color: const Color.fromARGB(255, 255, 255, 255),
+                      borderRadius: BorderRadius.circular(24),
+                     
+                    ),
+                    child: Tab(text: 'TV'),
+                  ),
+                ),
+
+                      Material(
+                  elevation:
+                      4, // Adjust the elevation to control the shadow effect
+                  borderRadius: BorderRadius.circular(24),
+                  child: Container(
+                    width: 100,
+                    height: 35,
+                    decoration: BoxDecoration(
+                      color: const Color.fromARGB(255, 255, 255, 255),
+                      borderRadius: BorderRadius.circular(24),
+                      border: Border.all(
+                          color: Color.fromARGB(255, 255, 255, 255),
+                          width: 0.3),
+                    ),
+                    child: Tab(text: 'PC'),
+                  ),
+                ),
+
+                      Material(
+                  elevation:
+                      4, // Adjust the elevation to control the shadow effect
+                  borderRadius: BorderRadius.circular(24),
+                  child: Container(
+                    width: 100,
+                    height: 35,
+                    decoration: BoxDecoration(
+                      color: const Color.fromARGB(255, 255, 255, 255),
+                      borderRadius: BorderRadius.circular(24),
+                      border: Border.all(
+                          color: Color.fromARGB(255, 255, 255, 255),
+                          width: 0.3),
+                    ),
+                    child: Tab(text: 'Phone'),
+                  ),
+                ),
+              ],
+              indicatorColor: Color.fromARGB(255, 135, 255, 211),
+              
+             
+             
+            ),
           ),
           Expanded(
             child: TabBarView(

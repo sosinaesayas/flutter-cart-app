@@ -67,9 +67,9 @@ class _HomeState extends State<Home> {
           case HomeLoaddedSuccessState:
             final successState = state as HomeLoaddedSuccessState;
             return Scaffold(
-              backgroundColor: Color.fromARGB(255, 216, 243, 222),
+              // backgroundColor: Color.fromARGB(255, 216, 243, 222),
               appBar: AppBar(
-                backgroundColor: Color.fromARGB(255, 88, 209, 191),
+                backgroundColor: Color.fromARGB(255, 247, 142, 142),
                 title: Text("Yigzu Electronics"),
                 actions: [
                   IconButton(
@@ -84,8 +84,9 @@ class _HomeState extends State<Home> {
                       icon: Icon(Icons.shopping_bag_outlined)),
                 ],
               ),
-              body: pages[selectedPage], 
               
+              
+              body: pages[selectedPage],
               
               bottomNavigationBar: Row(children: [
                   GestureDetector(
