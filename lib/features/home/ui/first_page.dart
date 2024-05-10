@@ -1,9 +1,10 @@
 import 'package:cart_app/features/home/ui/home_widgets.dart';
 import 'package:cart_app/features/home/ui/tabBar/pcTabBar.dart';
 import 'package:cart_app/features/home/ui/tabBar/phoneTabBar.dart';
+import 'package:cart_app/features/home/ui/tabBar/tvTabBar.dart';
 import 'package:flutter/material.dart';
 import 'package:cart_app/features/home/bloc/home_bloc.dart';
-import 'package:cart_app/features/home/ui/tabBar/tvTabBar.dart';
+// import 'package:cart_app/features/home/ui/tabBar/tvTabBar.dart';
 import 'package:flutter/rendering.dart';
 
 class FirstPage extends StatefulWidget {
@@ -21,7 +22,7 @@ class _FirstPageState extends State<FirstPage>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 3, vsync: this);
+    _tabController = TabController(length: 4, vsync: this);
   }
 
   @override
@@ -52,7 +53,22 @@ class _FirstPageState extends State<FirstPage>
                       borderRadius: BorderRadius.circular(24),
                      
                     ),
-                    child: Tab(text: 'TV'),
+                    child: Tab(text: 'All'),
+                  ),
+                ),
+                Material(                   
+                  elevation:
+                      4, // Adjust the elevation to control the shadow effect
+                  borderRadius: BorderRadius.circular(24),
+                  child: Container(
+                    width: 100,
+                    height: 35,
+                    decoration: BoxDecoration(
+                      color: const Color.fromARGB(255, 255, 255, 255),
+                      borderRadius: BorderRadius.circular(24),
+                     
+                    ),
+                    child: Tab(text: 'Tv'),
                   ),
                 ),
 
@@ -92,7 +108,7 @@ class _FirstPageState extends State<FirstPage>
                   ),
                 ),
               ],
-              indicatorColor: Color.fromARGB(255, 135, 255, 211),
+              indicatorColor: Colors.blue,
               
              
              
@@ -103,6 +119,7 @@ class _FirstPageState extends State<FirstPage>
               controller: _tabController,
               children: [
                 ProductsListPage(),
+                TvTabBar(),
                 PcTabBar(),
                 PhoneTabBar(),
               ],

@@ -1,14 +1,15 @@
 import "package:cart_app/features/cart/bloc/cart_bloc.dart";
+import "package:cart_app/features/wishlist/bloc/wishlist_bloc.dart";
 import 'package:flutter/material.dart';
 import "package:cart_app/features/home/models/home_product.dart";
 import "package:flutter/rendering.dart";
 import "package:flutter/widgets.dart";
 
 
-class CartTileWidget extends StatelessWidget {
+  class WishlistTileWidget extends StatelessWidget {
   final ProductModel productModel;
-  final CartBloc cartBloc;
-  const CartTileWidget({Key? key, required this.productModel, required this.cartBloc}) : super(key: key);
+  final WishlistBloc wishlistBloc;
+  const WishlistTileWidget({Key? key, required this.productModel, required this.wishlistBloc}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -56,19 +57,16 @@ class CartTileWidget extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(width: 10), // Adjust spacing as needed
-          // Icons
-          Column(
-             children: <Widget>[
-                     Icon(Icons.add),
-              // SizedBox(height: 10),
-              Text("count"),
-              // SizedBox(height: 10),
-              Icon(Icons.minimize),
-              SizedBox(height: 25),
-              Icon(Icons.delete)
-            ],
-          ),
+          Column(children: [
+            ElevatedButton.icon(onPressed: (){},
+             icon: Icon(Icons.shopping_basket_sharp), label: Text("Add to Cart")),
+             SizedBox(height: 30),
+             Icon(Icons.delete),
+          ],
+         
+          
+          )
+         
         ],
       ),
     );
