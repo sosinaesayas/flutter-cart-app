@@ -34,20 +34,28 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
             .toList()));
   }
 
-  FutureOr<void> homeProductWishlistButtonClickedEvent(
-      HomeProductWishlistButtonClickedEvent event, Emitter<HomeState> emit) {
-    print("wishlist clicked");
-    wishlistItems.add(event.clickedProduct);
-    // print("emitting");
-    emit(HomeProductItemWishlistedActionState());
-  }
 
-  FutureOr<void> homeProductCartButtonClickedEvent(
-      HomeProductCartButtonClickedEvent event, Emitter<HomeState> emit) {
-    print("cart clicked");
-    cartItems.add(event.clickedProduct);
-    emit(HomeProductItemCartedActionState());
+
+  FutureOr<void> homeProductWishlistButtonClickedEvent(
+    HomeProductWishlistButtonClickedEvent event, Emitter<HomeState> emit) {
+  print("wishlist clicked");
+  if (!wishlistItems.any((item) => item.id == event.clickedProduct.id)) {
+    wishlistItems.add(event.clickedProduct);
   }
+  // Emit the updated state
+  emit(HomeProductItemWishlistedActionState());
+}
+
+FutureOr<void> homeProductCartButtonClickedEvent(
+    HomeProductCartButtonClickedEvent event, Emitter<HomeState> emit) {
+  print("cart clicked");
+  if (!cartItems.any((item) => item.id == event.clickedProduct.id)) {
+    cartItems.add(event.clickedProduct);
+  }
+  // Emit the updated state
+  emit(HomeProductItemCartedActionState());
+}
+
 
   FutureOr<void> homeWishlistButtonNavigateEvent(
       HomeWishlistButtonNavigateEvent event, Emitter<HomeState> emit) {

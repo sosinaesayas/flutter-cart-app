@@ -5,4 +5,10 @@ abstract class WishlistEvent {}
 
 class WishlistInitialEvent extends WishlistEvent{}
 
-class WishlistRemoveEvent extends WishlistEvent{}
+class ItemRemoveFromWishlistEvent extends WishlistEvent{
+   final String itemId;
+  ItemRemoveFromWishlistEvent(this.itemId);
+  // @override
+  // List<Object?> get props => [itemId];
+
+  }

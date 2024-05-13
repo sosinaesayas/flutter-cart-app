@@ -65,11 +65,7 @@ class Cart extends StatefulWidget {
 }
 
 class _CartState extends State<Cart> {
-  // final ProductModel productModel;
-  final CartBloc cartBloc = CartBloc(productModel);
-  
-  static ProductModel? productModel;
-
+  final CartBloc cartBloc = CartBloc();
   @override
   void initState() {
     cartBloc.add(CartInitialEvent());

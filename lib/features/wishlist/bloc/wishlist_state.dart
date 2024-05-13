@@ -10,7 +10,6 @@ final class WishlistInitial extends WishlistState {}
 final class WishlistSuccessState extends WishlistState{
   final List<ProductModel> wishlistItems;
   WishlistSuccessState({required this.wishlistItems});
-
 }
 
 

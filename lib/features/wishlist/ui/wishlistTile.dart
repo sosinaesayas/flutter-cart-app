@@ -1,21 +1,24 @@
-import "package:cart_app/features/cart/bloc/cart_bloc.dart";
-import "package:cart_app/features/wishlist/bloc/wishlist_bloc.dart";
 import 'package:flutter/material.dart';
-import "package:cart_app/features/home/models/home_product.dart";
-import "package:flutter/rendering.dart";
-import "package:flutter/widgets.dart";
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:cart_app/features/home/models/home_product.dart';
+import 'package:cart_app/features/home/bloc/home_bloc.dart';
+import 'package:cart_app/features/wishlist/bloc/wishlist_bloc.dart';
 
-
-  class WishlistTileWidget extends StatelessWidget {
+class WishlistTileWidget extends StatelessWidget {
   final ProductModel productModel;
   final WishlistBloc wishlistBloc;
-  const WishlistTileWidget({Key? key, required this.productModel, required this.wishlistBloc}) : super(key: key);
+
+  const WishlistTileWidget({
+    Key? key,
+    required this.productModel,
+    required this.wishlistBloc,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        border: Border.all(color:Colors.black12),
+        border: Border.all(color: Colors.black12),
         borderRadius: BorderRadius.circular(10),
       ),
       margin: EdgeInsets.all(10),
@@ -27,10 +30,11 @@ import "package:flutter/widgets.dart";
             width: 150,
             height: 120,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),    
+              borderRadius: BorderRadius.circular(10),
               image: DecorationImage(
-                fit:BoxFit.cover,
-                image: AssetImage(productModel.imageUrl))
+                fit: BoxFit.cover,
+                image: AssetImage(productModel.imageUrl),
+              ),
             ),
           ),
           SizedBox(width: 10), // Adjust spacing as needed
@@ -57,16 +61,39 @@ import "package:flutter/widgets.dart";
               ],
             ),
           ),
-          Column(children: [
-            ElevatedButton.icon(onPressed: (){},
-             icon: Icon(Icons.shopping_basket_sharp), label: Text("Add to Cart")),
-             SizedBox(height: 30),
-             Icon(Icons.delete),
-          ],
-         
-          
-          )
-         
+          Column(
+            children: [
+              ElevatedButton.icon(
+                onPressed: () {
+                  // Get the HomeBloc instance from the widget tree
+                  final homeBloc = BlocProvider.of<HomeBloc>(context);
+                  // Dispatch the event using the bloc instance
+                  homeBloc.add(HomeProductCartButtonClickedEvent(
+                    clickedProduct: productModel,
+                  ));
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(
+                        'Item added to cart',
+                        style: TextStyle(color: Colors.black),
+                      ),
+                      backgroundColor: Color.fromARGB(255, 205, 247, 255),
+                    ),
+                  );
+                },
+                icon: Icon(Icons.shopping_basket_sharp),
+                label: Text("Add to Cart"),
+              ),
+              SizedBox(height: 30),
+              IconButton(
+                onPressed: () {
+                  String itemId = productModel.id;
+                  wishlistBloc.add(ItemRemoveFromWishlistEvent(itemId));
+                },
+                icon: Icon(Icons.delete),
+              ),
+            ],
+          ),
         ],
       ),
     );

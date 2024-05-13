@@ -44,8 +44,7 @@ class ListTileWidget extends StatelessWidget {
               fontWeight: FontWeight.w500,
               ),
             ),
-            // SizedBox(height: 10),
-            // Text(productModel.description),
+            
             SizedBox(height: 10),
       
             Row(

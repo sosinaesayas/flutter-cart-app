@@ -6,8 +6,8 @@ abstract class CartEvent {}
 class CartInitialEvent extends CartEvent{}
 
 class ItemRemoveFromCartEvent extends CartEvent{
-  final String productId;
-  ItemRemoveFromCartEvent(this.productId);
+  final String itemId;
+  ItemRemoveFromCartEvent(this.itemId);
 }
 
 class CartIncrementEvent extends CartEvent{
