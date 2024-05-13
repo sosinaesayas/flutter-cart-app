@@ -12,3 +12,9 @@ final class CartSuccessState extends CartState{
   CartSuccessState({required this.cartItems});
 }
 
+
+
+final class CartCounterState extends CartActionState{
+  int count;
+  CartCounterState(this.count);
+}
