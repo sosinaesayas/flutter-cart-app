@@ -21,6 +21,7 @@ class _CartTileWidgetState extends State<CartTileWidget> {
   Widget build(BuildContext context) {
     int itemCount = widget.cartBloc.itemCountMap[widget.productModel.id] ?? 0;
 
+
     return Container(
       decoration: BoxDecoration(
         border: Border.all(color: Colors.black12),
@@ -98,3 +99,16 @@ class _CartTileWidgetState extends State<CartTileWidget> {
     );
   }
 }
+
+
+double calculateTotalCartAmount(Map<String, int> itemCountMap, Map<String, ProductModel> productsMap) {
+  double totalAmount = 0.0;
+  itemCountMap.forEach((itemId, itemCount) {
+    ProductModel productModel = productsMap[itemId]!;
+    double totalItemPrice = productModel.price * itemCount;
+    totalAmount += totalItemPrice;
+  });
+  return totalAmount;
+}
+
+

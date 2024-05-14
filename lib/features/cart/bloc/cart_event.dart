@@ -21,3 +21,5 @@ class CartDecrementEvent extends CartEvent{
 }
 
 class CartCounterEvent extends CartEvent {}
+
+class CheckoutEvent extends CartEvent {}
