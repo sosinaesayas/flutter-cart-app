@@ -37,7 +37,7 @@ class WishlistTileWidget extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(width: 10), // Adjust spacing as needed
+          SizedBox(width: 30), // Adjust spacing as needed
           // Name and Price
           Expanded(
             child: Column(

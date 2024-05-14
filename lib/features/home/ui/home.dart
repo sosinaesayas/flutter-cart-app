@@ -1,3 +1,4 @@
+import 'package:cart_app/features/person/person_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart'; // Import flutter_bloc
 import 'package:cart_app/features/home/bloc/home_bloc.dart';
@@ -22,7 +23,7 @@ class _HomeState extends State<Home> {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => HomeBloc()),
-        BlocProvider(create: (context) => WishlistBloc()), // Provide WishlistBloc
+        BlocProvider(create: (context) => WishlistBloc()), 
       ],
       child: Scaffold(
         appBar: AppBar(
@@ -71,7 +72,7 @@ class _HomeState extends State<Home> {
       case 2:
         return Cart();
       default:
-        return Container(); // Default case, return an empty container
+        return PersonPage();
     }
   }
 }

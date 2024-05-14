@@ -1,9 +1,9 @@
-import 'package:cart_app/features/cart/bloc/cart_bloc.dart';
-import 'package:cart_app/features/cart/ui/cartTileWidget.dart';
-import 'package:cart_app/features/home/models/home_product.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+// import 'package:cart_app/features/cart/bloc/cart_bloc.dart';
+// import 'package:cart_app/features/cart/ui/cartTileWidget.dart';
+// import 'package:cart_app/features/home/models/home_product.dart';
+// import 'package:flutter/material.dart';
+// import 'package:flutter/rendering.dart';
+// import 'package:flutter_bloc/flutter_bloc.dart';
 
 // class Cart extends StatefulWidget {
 //   const Cart({Key? key}) : super(key: key);
@@ -14,46 +14,37 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 // class _CartState extends State<Cart> {
 //   final CartBloc cartBloc = CartBloc();
-  
-  
+//   String appBarTitle = 'Cart'; // Initial title
+
 //   @override
 //   void initState() {
 //     cartBloc.add(CartInitialEvent());
 //     super.initState();
-    
-   
-
 //   }
-
   
-
 //   @override
 //   Widget build(BuildContext context) {
+//     final currentState = cartBloc.state;
+//           if (currentState is CartSuccessState) {
+//             final totalAmount = currentState.totalAmount;
+//             setState(() {
+//               appBarTitle = 'Total Amount: \$${totalAmount.toStringAsFixed(2)}';
+//             });
+//           }
 //     return Scaffold(
 //       appBar: AppBar(
-//         title: Text("total"),
-        
+//         title: Text(appBarTitle), // Display the appBarTitle in the app bar
 //         actions: [
-     
-        
-
-//         ElevatedButton.icon(
-//   onPressed: () {
-//     final currentState = cartBloc.state;
-//     if (currentState is CartSuccessState) {
-//       final totalAmount = currentState.totalAmount;
-//       setState(() {
-//         // total = '\$${totalAmount.toStringAsFixed(2)}';
-//       });
-//       print('Total Amount: \$${totalAmount.toStringAsFixed(2)}');
-//     }
-//   },
-//   icon: Icon(Icons.shopping_cart_checkout_rounded),
-//   label: Text("Checkout"),
-// ),
-// //  Text(TotalAmount),
+          
+//           ElevatedButton.icon(
+//             onPressed: () {
+             
+//             },
+//             icon: Icon(Icons.shopping_cart_checkout_rounded),
+//             label: Text("Checkout"),
+//           )
 //         ],
-//     ),
+//       ),
 //       body: BlocConsumer<CartBloc, CartState>(
 //         bloc: cartBloc,
 //         listener: (context, state) {},
@@ -80,6 +71,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 //   }
 // }
 
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:cart_app/features/cart/bloc/cart_bloc.dart';
+import 'package:cart_app/features/cart/ui/cartTileWidget.dart';
+import 'package:cart_app/features/home/models/home_product.dart';
 
 class Cart extends StatefulWidget {
   const Cart({Key? key}) : super(key: key);
@@ -97,22 +93,23 @@ class _CartState extends State<Cart> {
     cartBloc.add(CartInitialEvent());
     super.initState();
   }
-
+  
   @override
   Widget build(BuildContext context) {
+    final currentState = cartBloc.state;
+    if (currentState is CartSuccessState) {
+      final totalAmount = currentState.totalAmount;
+      setState(() {
+        appBarTitle = 'Total Amount: \$${totalAmount.toStringAsFixed(2)}';
+      });
+    }
     return Scaffold(
       appBar: AppBar(
-        title: Text(appBarTitle), // Display the appBarTitle in the app bar
+        title: Text(appBarTitle),
         actions: [
           ElevatedButton.icon(
             onPressed: () {
-              final currentState = cartBloc.state;
-              if (currentState is CartSuccessState) {
-                final totalAmount = currentState.totalAmount;
-                setState(() {
-                  appBarTitle = 'Total Amount: \$${totalAmount.toStringAsFixed(2)}';
-                });
-              }
+              // Implement checkout logic here
             },
             icon: Icon(Icons.shopping_cart_checkout_rounded),
             label: Text("Checkout"),
@@ -137,10 +134,15 @@ class _CartState extends State<Cart> {
               );
             default:
           }
-
           return Container();
         },
       ),
     );
+  }
+  
+  @override
+  void dispose() {
+    cartBloc.close(); // Don't forget to close the bloc when disposing the widget
+    super.dispose();
   }
 }

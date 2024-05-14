@@ -43,7 +43,7 @@ class _CartTileWidgetState extends State<CartTileWidget> {
               ),
             ),
           ),
-          SizedBox(width: 10),
+          SizedBox(width: 30),
           // Name and Price
           Expanded(
             child: Column(
