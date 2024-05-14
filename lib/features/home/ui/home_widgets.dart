@@ -86,6 +86,7 @@ class _ProductsListPageState extends State<ProductsListPage> {
                 return ListTileWidget(
                     productModel: product, homeBloc: homeBloc);
               },
+
             );
           case HomeErrorState:
             return Scaffold(

@@ -19,9 +19,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<HomeProductCartButtonClickedEvent>(homeProductCartButtonClickedEvent);
     on<HomeWishlistButtonNavigateEvent>(homeWishlistButtonNavigateEvent);
     on<HomeCartButtonNavigateEvent>(homeCartButtonNavigateEvent);
-    on<PcTabSelectEvent>(pcTabSelectEvent);
-    on<TvTabSelectEvent>(tvTabSelectEvent);
-    on<PhoneTabSelectEvent>(phoneTabSelectEvent);
+    // on<PcTabSelectEvent>(pcTabSelectEvent);
+    // on<TvTabSelectEvent>(tvTabSelectEvent);
+    // on<PhoneTabSelectEvent>(phoneTabSelectEvent);
   }
 
   FutureOr<void> homeInitialEvent(
@@ -69,21 +69,21 @@ FutureOr<void> homeProductCartButtonClickedEvent(
     emit(HomeNavigateToCartPageActionState());
   }
 
-  FutureOr<void> pcTabSelectEvent(
-      PcTabSelectEvent event, Emitter<HomeState> emit) {
-    print("pc tab is selected");
-    emit(PcTabSelectedActionState());
-  }
+  // FutureOr<void> pcTabSelectEvent(
+  //     PcTabSelectEvent event, Emitter<HomeState> emit) {
+  //   print("pc tab is selected");
+  //   emit(PcTabSelectedActionState());
+  // }
 
-  FutureOr<void> tvTabSelectEvent(
-      TvTabSelectEvent event, Emitter<HomeState> emit) {
-    print("tv tab is selected");
-    emit(TvTabSelectedActionState());
-  }
+  // FutureOr<void> tvTabSelectEvent(
+  //     TvTabSelectEvent event, Emitter<HomeState> emit) {
+  //   print("tv tab is selected");
+  //   emit(TvTabSelectedActionState());
+  // }
 
-  FutureOr<void> phoneTabSelectEvent(
-      PhoneTabSelectEvent event, Emitter<HomeState> emit) {
-        print("phone tba is selected");
-        emit(PhoneTabSelectedActionState());
-      }
+  // FutureOr<void> phoneTabSelectEvent(
+  //     PhoneTabSelectEvent event, Emitter<HomeState> emit) {
+  //       print("phone tba is selected");
+  //       emit(PhoneTabSelectedActionState());
+  //     }
 }
