@@ -1,20 +1,45 @@
+// import 'package:flutter/material.dart';
+// import 'package:cart_app/features/home/ui/home.dart';
+// void main() {
+//   runApp(const Cart_app());
+// }
+
+// class Cart_app extends StatelessWidget {
+//   const Cart_app({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+      
+//       debugShowCheckedModeBanner: false,
+//       theme: ThemeData(
+//         primaryColor: Colors.teal
+//       ),
+//       home:Home()
+//     );
+//   }
+// }
+
 import 'package:flutter/material.dart';
-import 'package:cart_app/features/home/ui/home.dart';
+import 'package:cart_app/routes/route.dart';
+
 void main() {
-  runApp(const Cart_app());
+  runApp(const CartApp());
 }
 
-class Cart_app extends StatelessWidget {
-  const Cart_app({super.key});
+class CartApp extends StatelessWidget {
+  const CartApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primaryColor: Colors.teal
+        primaryColor: Colors.teal,
       ),
-      home:Home()
+      routerConfig: router,
     );
   }
 }
+
+

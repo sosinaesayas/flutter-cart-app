@@ -99,3 +99,4 @@ class WishlistTileWidget extends StatelessWidget {
     );
   }
 }
+

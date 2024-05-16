@@ -14,9 +14,7 @@ class _LoginFormState extends State<LoginForm> {
     final form = _formKey.currentState;
     if (form!.validate()) {
       form.save();
-      // Perform login with _email and _password
-      // You can add your login logic here
-      // For example, you can use FirebaseAuth for authentication
+      
       print('Login successful with Email: $_email, Password: $_password');
     }
   }

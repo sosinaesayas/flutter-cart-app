@@ -7,11 +7,6 @@ abstract class CartActionState extends CartState{}
 
 final class CartInitial extends CartState {}
 
-// final class CartSuccessState extends CartState{
-//   final List<ProductModel> cartItems;
- 
-//   CartSuccessState({required this.cartItems, required Map<String, int> itemCountMap, required double totalAmount});
-// }
 
 final class CartCounterState extends CartActionState{
   int count;

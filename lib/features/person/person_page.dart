@@ -16,7 +16,7 @@ class PersonPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Expanded(
-              child: SignUpForm(), // Display the signup form
+              child: SignUpForm(), 
             ),
             SizedBox(height: 20.0),
             Row(
@@ -30,7 +30,7 @@ class PersonPage extends StatelessWidget {
                       MaterialPageRoute(builder: (context) => LoginPage()), // Navigate to the login page
                     );
                   },
-                  child: Text('Login here'), // Link to login page
+                  child: Text('Login here'), 
                 ),
               ],
             ),

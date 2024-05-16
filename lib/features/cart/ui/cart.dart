@@ -1,9 +1,7 @@
+// import 'package:flutter/material.dart';
+// import 'package:flutter_bloc/flutter_bloc.dart';
 // import 'package:cart_app/features/cart/bloc/cart_bloc.dart';
 // import 'package:cart_app/features/cart/ui/cartTileWidget.dart';
-// import 'package:cart_app/features/home/models/home_product.dart';
-// import 'package:flutter/material.dart';
-// import 'package:flutter/rendering.dart';
-// import 'package:flutter_bloc/flutter_bloc.dart';
 
 // class Cart extends StatefulWidget {
 //   const Cart({Key? key}) : super(key: key);
@@ -13,61 +11,85 @@
 // }
 
 // class _CartState extends State<Cart> {
-//   final CartBloc cartBloc = CartBloc();
-//   String appBarTitle = 'Cart'; // Initial title
+//   late CartBloc cartBloc;
 
 //   @override
 //   void initState() {
-//     cartBloc.add(CartInitialEvent());
 //     super.initState();
+//     cartBloc = CartBloc()..add(CartInitialEvent());
 //   }
-  
+//   String Value = "";
+
 //   @override
 //   Widget build(BuildContext context) {
-//     final currentState = cartBloc.state;
-//           if (currentState is CartSuccessState) {
-//             final totalAmount = currentState.totalAmount;
-//             setState(() {
-//               appBarTitle = 'Total Amount: \$${totalAmount.toStringAsFixed(2)}';
-//             });
-//           }
 //     return Scaffold(
 //       appBar: AppBar(
-//         title: Text(appBarTitle), // Display the appBarTitle in the app bar
-//         actions: [
-          
-//           ElevatedButton.icon(
-//             onPressed: () {
-             
-//             },
-//             icon: Icon(Icons.shopping_cart_checkout_rounded),
-//             label: Text("Checkout"),
-//           )
-//         ],
+//         title: Text("Cart"),
 //       ),
 //       body: BlocConsumer<CartBloc, CartState>(
 //         bloc: cartBloc,
 //         listener: (context, state) {},
-//         listenWhen: (previous, current) => current is CartActionState,
-//         buildWhen: (previous, current) => !(current is CartActionState),
 //         builder: (context, state) {
-//           switch (state.runtimeType) {
-//             case CartSuccessState:
-//               final successState = state as CartSuccessState;
-//               return ListView.builder(
-//                 itemCount: successState.cartItems.length,
-//                 itemBuilder: (context, index) {
-//                   final productModel = successState.cartItems[index];
-//                   return CartTileWidget(productModel: productModel, cartBloc: cartBloc);
-//                 },
-//               );
-//             default:
+//           if (state is CartSuccessState) {
+//                 Value ='\$${state.totalAmount.toStringAsFixed(2)}';
+//             return Column(
+//               children: [
+//                 Expanded(
+//                   child: ListView.builder(
+//                     itemCount: state.cartItems.length,
+//                     itemBuilder: (context, index) {
+//                       final productModel = state.cartItems[index];
+//                       return CartTileWidget(productModel: productModel, cartBloc: cartBloc);
+//                     },
+//                   ),
+//                 ),
+//                 // Padding(
+//                 //   padding: const EdgeInsets.all(8.0),
+//                 //   child: Text(
+//                 //     'Total Amount: \$${state.totalAmount.toStringAsFixed(2)}',
+//                 //     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+//                 //   ),
+//                 // ),
+//               ],
+//             );
+//           } else {
+//             return Center(child: CircularProgressIndicator());
 //           }
-
-//           return Container();
 //         },
 //       ),
+//       bottomNavigationBar: BottomAppBar(
+//         child: Padding(
+//           padding: const EdgeInsets.symmetric(horizontal: 16.0),
+//           child: Row(
+//             children: [
+//              Text(
+//                     "value: $Value",
+//                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+//                   ),
+//               ElevatedButton(
+//                 onPressed: () {
+//                   // Implement checkout logic here
+//                 },
+//                 child: Row(
+//                   mainAxisAlignment: MainAxisAlignment.center,
+//                   children: [
+//                     Icon(Icons.shopping_cart_checkout_rounded),
+//                     SizedBox(width: 8),
+//                     Text("Checkout"),
+//                   ],
+//                 ),
+//               ),
+//             ],
+//           ),
+//         ),
+//       ),
 //     );
+//   }
+
+//   @override
+//   void dispose() {
+//     cartBloc.close();
+//     super.dispose();
 //   }
 // }
 
@@ -75,7 +97,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cart_app/features/cart/bloc/cart_bloc.dart';
 import 'package:cart_app/features/cart/ui/cartTileWidget.dart';
-import 'package:cart_app/features/home/models/home_product.dart';
 
 class Cart extends StatefulWidget {
   const Cart({Key? key}) : super(key: key);
@@ -85,64 +106,74 @@ class Cart extends StatefulWidget {
 }
 
 class _CartState extends State<Cart> {
-  final CartBloc cartBloc = CartBloc();
-  String appBarTitle = 'Cart'; // Initial title
+  late CartBloc cartBloc;
 
   @override
   void initState() {
-    cartBloc.add(CartInitialEvent());
     super.initState();
+    cartBloc = CartBloc()..add(CartInitialEvent());
   }
-  
+
   @override
   Widget build(BuildContext context) {
-    final currentState = cartBloc.state;
-    if (currentState is CartSuccessState) {
-      final totalAmount = currentState.totalAmount;
-      setState(() {
-        appBarTitle = 'Total Amount: \$${totalAmount.toStringAsFixed(2)}';
-      });
-    }
     return Scaffold(
       appBar: AppBar(
-        title: Text(appBarTitle),
-        actions: [
-          ElevatedButton.icon(
-            onPressed: () {
-              // Implement checkout logic here
-            },
-            icon: Icon(Icons.shopping_cart_checkout_rounded),
-            label: Text("Checkout"),
-          )
-        ],
+        title: Text("Cart"),
       ),
       body: BlocConsumer<CartBloc, CartState>(
         bloc: cartBloc,
         listener: (context, state) {},
-        listenWhen: (previous, current) => current is CartActionState,
-        buildWhen: (previous, current) => !(current is CartActionState),
         builder: (context, state) {
-          switch (state.runtimeType) {
-            case CartSuccessState:
-              final successState = state as CartSuccessState;
-              return ListView.builder(
-                itemCount: successState.cartItems.length,
-                itemBuilder: (context, index) {
-                  final productModel = successState.cartItems[index];
-                  return CartTileWidget(productModel: productModel, cartBloc: cartBloc);
-                },
-              );
-            default:
+          if (state is CartSuccessState) {
+            return Column(
+              children: [
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: state.cartItems.length,
+                    itemBuilder: (context, index) {
+                      final productModel = state.cartItems[index];
+                      return CartTileWidget(productModel: productModel, cartBloc: cartBloc);
+                    },
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    'Total Amount: \$${state.totalAmount.toStringAsFixed(2)}',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ],
+            );
+          } else {
+            return Center(child: CircularProgressIndicator());
           }
-          return Container();
         },
+      ),
+      bottomNavigationBar: BottomAppBar(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: ElevatedButton(
+            onPressed: () {
+              // Implement checkout logic here
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.shopping_cart_checkout_rounded),
+                SizedBox(width: 8),
+                Text("Checkout"),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
-  
+
   @override
   void dispose() {
-    cartBloc.close(); // Don't forget to close the bloc when disposing the widget
+    cartBloc.close();
     super.dispose();
   }
 }

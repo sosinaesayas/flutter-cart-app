@@ -4,7 +4,6 @@ import 'package:cart_app/features/home/ui/tabBar/phoneTabBar.dart';
 import 'package:cart_app/features/home/ui/tabBar/tvTabBar.dart';
 import 'package:flutter/material.dart';
 import 'package:cart_app/features/home/bloc/home_bloc.dart';
-// import 'package:cart_app/features/home/ui/tabBar/tvTabBar.dart';
 import 'package:flutter/rendering.dart';
 
 class FirstPage extends StatefulWidget {
@@ -34,6 +33,9 @@ class _FirstPageState extends State<FirstPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Yigzu Products"),
+      ),
       // backgroundColor: const Color.fromARGB(255, 188, 217, 240),
       body: Column(
         children: [
